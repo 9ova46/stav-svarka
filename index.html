@@ -154,26 +154,6 @@ footer{border-top:1px solid var(--border-soft);padding:44px 0 28px;background:va
 .theme-toggle .ic-sun{display:none}
 [data-theme="dark"] .theme-toggle .ic-sun{display:block}
 [data-theme="dark"] .theme-toggle .ic-moon{display:none}
-.compare-btn{position:fixed;top:14px;right:72px;z-index:9998;display:inline-flex;align-items:center;gap:7px;padding:0 18px;height:46px;border-radius:999px;background:var(--bg);box-shadow:0 6px 22px rgba(20,15,5,.1),inset 0 0 0 1px var(--border);font-size:13px;font-weight:600}
-.compare-btn:hover{transform:translateY(-2px)}
-.compare-btn svg{width:16px;height:16px;color:var(--accent)}
-.compare-overlay{position:fixed;inset:0;z-index:299;background:var(--bg);display:none}
-.compare-overlay.is-open{display:block}
-.compare-panel{position:absolute;left:0;top:0;bottom:0;width:50vw;background:var(--surface);display:flex;flex-direction:column}
-.compare-panel.right{left:50vw}
-.compare-panel iframe{flex:1;width:100%;border:0;background:#fff}
-.compare-bar{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-bottom:1px solid var(--border-soft)}
-.compare-bar .cap{font-family:monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.compare-bar .close-cmp{width:36px;height:36px;border-radius:50%;box-shadow:inset 0 0 0 1px var(--border-soft);display:grid;place-items:center;font-size:20px;color:var(--muted)}
-.compare-resizer{position:absolute;left:50vw;top:0;bottom:0;width:16px;margin-left:-8px;cursor:ew-resize;z-index:10;display:flex;align-items:center;justify-content:center;touch-action:none}
-.compare-resizer::after{content:"";position:absolute;left:50%;top:0;bottom:0;width:5px;background:var(--accent);transform:translateX(-50%)}
-.compare-resizer::before{content:"⋮";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:22px;height:68px;background:var(--accent);border-radius:999px;display:grid;place-items:center;color:#fff;font-size:15px}
-.compare-tabs{display:none;position:fixed;left:0;right:0;top:0;z-index:300;background:var(--surface);border-bottom:1px solid var(--border-soft)}
-.compare-tabs button{flex:1;padding:14px;font-size:13px;font-weight:600;color:var(--muted);border-bottom:2px solid transparent}
-.compare-tabs button.is-active{color:var(--accent);border-bottom-color:var(--accent)}
-@media(max-width:900px){.compare-panel,.compare-panel.right{width:100%;left:0;display:none}.compare-panel.is-active{display:flex}.compare-tabs{display:flex}.compare-resizer{display:none}}
-html.compare-open .compare-btn,html.compare-open .theme-toggle{opacity:0;pointer-events:none}
-html.compare-open .compare-btn,html.compare-open .theme-toggle{opacity:0;pointer-events:none}
 @media(max-width:900px){
   nav,.phone-link,.header-right .btn{display:none}
   .burger{display:flex}
@@ -183,10 +163,6 @@ html.compare-open .compare-btn,html.compare-open .theme-toggle{opacity:0;pointer
   .products-grid{grid-template-columns:1fr}
   .about-grid{grid-template-columns:1fr}
   .cta-grid{grid-template-columns:1fr}
-  .compare-panel,.compare-panel.right{width:100%;left:0;display:none}
-  .compare-panel.is-active{display:flex}
-  .compare-tabs{display:flex}
-  .compare-resizer{display:none}
 }
 @media(max-width:640px){.section{padding:64px 0}.stats-grid{grid-template-columns:1fr 1fr;gap:20px}.stat{padding-left:14px}.stat b{font-size:28px}}
 
@@ -217,23 +193,9 @@ html.compare-open .compare-btn,html.compare-open .theme-toggle{opacity:0;pointer
   <svg aria-hidden="true" class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13.5A8 8 0 0 1 10.5 4a7.5 7.5 0 1 0 9.5 9.5Z"/></svg>
 </button>
 
-<button class="compare-btn" id="compareBtn" aria-label="Сравнить с оригиналом">
-  <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3M8 21H5a2 2 0 0 1-2-2v-3m18 0v3a2 2 0 0 1-2 2h-3"/></svg>
-  Сравнить
-</button>
 
-<div class="compare-overlay" id="compareOverlay">
-  <div class="compare-tabs"><button class="is-active" data-tab="original">Оригинал</button><button data-tab="new">Новый дизайн</button></div>
-  <div class="compare-panel is-active" id="panelOriginal">
-    <div class="compare-bar"><span class="cap">Оригинальный сайт</span><button class="close-cmp" id="compareClose">×</button></div>
-    <iframe src="https://stav-svarka.ru/" title="Оригинальный сайт Став-Сварка" loading="lazy"></iframe>
-  </div>
-  <div class="compare-resizer" id="cmpResizer"></div>
-  <div class="compare-panel right" id="panelNew">
-    <div class="compare-bar"><span class="cap">Новый дизайн</span><button class="close-cmp" id="compareClose2">×</button></div>
-    <iframe src="" title="Новый дизайн Став-Сварка" loading="lazy"></iframe>
-  </div>
-</div>
+
+
 
 <header>
   <div class="container header-inner">
@@ -404,13 +366,9 @@ html.compare-open .compare-btn,html.compare-open .theme-toggle{opacity:0;pointer
   document.querySelectorAll('[data-mnav]').forEach(function(a){a.addEventListener('click',function(){burger.classList.remove('open');mnav.classList.remove('open')})});
   var els=document.querySelectorAll('.reveal');
   if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-in');io.unobserve(e.target)}})},{threshold:.12});els.forEach(function(e){io.observe(e)})}else{els.forEach(function(e){e.classList.add('is-in')})}
-  var overlay=document.getElementById('compareOverlay');
-  document.querySelector('#panelNew iframe').src=window.location.href;
-  document.getElementById('compareBtn').addEventListener('click',function(){overlay.classList.add('is-open');html.classList.add('compare-open');html.style.overflow='hidden'});
-  function cc(){overlay.classList.remove('is-open');html.classList.remove('compare-open');html.style.overflow=''}
-  document.getElementById('compareClose').addEventListener('click',cc);document.getElementById('compareClose2').addEventListener('click',cc);
-  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&overlay.classList.contains('is-open'))cc()});
-  (function(){var rz=document.getElementById('cmpResizer'),drag=false;function setP(x){var pct=Math.max(20,Math.min(80,x/window.innerWidth*100));document.getElementById('panelOriginal').style.width=pct+'vw';document.getElementById('panelNew').style.left=pct+'vw';rz.style.left=pct+'vw'}rz.addEventListener('mousedown',function(e){drag=true;e.preventDefault()});rz.addEventListener('touchstart',function(e){drag=true},{passive:false});window.addEventListener('mousemove',function(e){if(drag)setP(e.clientX)});window.addEventListener('touchmove',function(e){if(drag&&e.touches[0])setP(e.touches[0].clientX)},{passive:false});window.addEventListener('mouseup',function(){drag=false});window.addEventListener('touchend',function(){drag=false})})();
+setTimeout(function(){document.querySelectorAll('.reveal').forEach(function(e){e.classList.add('is-in')})},800);
+
+
   var form=document.getElementById('leadForm'),ok=document.getElementById('formOk');
   form.addEventListener('submit',function(e){e.preventDefault();form.style.display='none';ok.style.display='block'});
 
