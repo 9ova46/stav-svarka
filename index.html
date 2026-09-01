@@ -138,10 +138,9 @@ nav a:hover{color:var(--fg)}
 .field textarea{min-height:100px;resize:vertical}
 .form-ok{display:none;text-align:center;padding:20px 0}
 
-}
 
 /* footer */
-footer{border-top:1px solid var(--border-soft);padding:44px 0 28px}
+footer{border-top:1px solid var(--border-soft);padding:44px 0 28px;background:var(--surface)}
 .footer-inner{display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;padding-bottom:32px;border-bottom:1px solid var(--border-soft)}
 .footer-col h6{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:14px}
 .footer-col ul{display:grid;gap:10px}
@@ -195,6 +194,19 @@ html.compare-open .compare-btn,html.compare-open .theme-toggle{opacity:0;pointer
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s,transform .6s}
 .reveal.is-in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+/* popup */
+.popup{position:fixed;inset:0;z-index:10000;display:none;align-items:center;justify-content:center;padding:20px}
+.popup.open{display:flex}
+.popup-box{animation:popIn .35s cubic-bezier(.2,0,0,1)}
+@keyframes popIn{from{opacity:0;transform:scale(.92) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.popup-backdrop{position:absolute;inset:0;background:rgba(11,13,19,.72);backdrop-filter:blur(6px)}
+.popup-box{position:relative;background:var(--surface);border-radius:20px;padding:36px 32px;max-width:480px;width:100%;box-shadow:0 24px 64px rgba(0,0,0,.28),inset 0 0 0 1px var(--line-soft);text-align:center}
+.popup-badge{display:inline-block;font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#fff;background:var(--accent);padding:6px 12px;border-radius:999px;margin-bottom:16px}
+.popup-box h3{font-size:26px;margin-bottom:10px}
+.popup-box p{color:var(--muted);font-size:14.5px;margin-bottom:24px;line-height:1.5}
+.popup-close{position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:50%;background:var(--surface-2);display:grid;place-items:center;color:var(--muted);font-size:20px}
+
 </style>
 </head>
 <body>
@@ -352,7 +364,7 @@ html.compare-open .compare-btn,html.compare-open .theme-toggle{opacity:0;pointer
   </div>
 </section>
 
-<!-- DEMO -->
+
 
 </main>
 
@@ -366,6 +378,18 @@ html.compare-open .compare-btn,html.compare-open .theme-toggle{opacity:0;pointer
     <div class="footer-bottom"><span>© 2026 Став-Сварка · Навесы под ключ</span><span class="mono">stav-svarka.ru</span></div>
   </div>
 </footer>
+
+
+<div class="popup" id="popup" role="dialog" aria-modal="true" aria-label="Акция">
+  <div class="popup-backdrop" id="popupBackdrop"></div>
+  <div class="popup-box">
+    <button class="popup-close" id="popupClose" aria-label="Закрыть">×</button>
+    <span class="popup-badge">Предложение</span>
+    <h3>Бесплатный замер</h3>
+    <p>Приедем, снимем размеры и посчитаем навес</p>
+    <button class="btn btn-primary btn-block" data-scroll="#contacts" id="popupCta">Записаться на замер</button>
+  </div>
+</div>
 
 <script>
 (function(){
@@ -388,6 +412,16 @@ html.compare-open .compare-btn,html.compare-open .theme-toggle{opacity:0;pointer
   (function(){var rz=document.getElementById('cmpResizer'),drag=false;function setP(x){var pct=Math.max(20,Math.min(80,x/window.innerWidth*100));document.getElementById('panelOriginal').style.width=pct+'vw';document.getElementById('panelNew').style.left=pct+'vw';rz.style.left=pct+'vw'}rz.addEventListener('mousedown',function(e){drag=true;e.preventDefault()});rz.addEventListener('touchstart',function(e){drag=true},{passive:false});window.addEventListener('mousemove',function(e){if(drag)setP(e.clientX)});window.addEventListener('touchmove',function(e){if(drag&&e.touches[0])setP(e.touches[0].clientX)},{passive:false});window.addEventListener('mouseup',function(){drag=false});window.addEventListener('touchend',function(){drag=false})})();
   var form=document.getElementById('leadForm'),ok=document.getElementById('formOk');
   form.addEventListener('submit',function(e){e.preventDefault();form.style.display='none';ok.style.display='block'});
+
+  // popup
+  (function(){var pp=document.getElementById('popup');if(!pp)return;try{if(sessionStorage.getItem('POPUP'))return;}catch(e){}
+  setTimeout(function(){pp.classList.add('open')},7000);
+  function c(){pp.classList.remove('open');try{sessionStorage.setItem('POPUP','1')}catch(e){}}
+  var cl=document.getElementById('popupClose');if(cl)cl.addEventListener('click',c);
+  var bk=document.getElementById('popupBackdrop');if(bk)bk.addEventListener('click',c);
+  var ct=document.getElementById('popupCta');if(ct)ct.addEventListener('click',function(){c();var el=document.querySelector('#contacts');if(el)el.scrollIntoView({behavior:'smooth'})});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&pp.classList.contains('open'))c()});})();
+
 })();
 </script>
 </body>
