@@ -138,16 +138,7 @@ nav a:hover{color:var(--fg)}
 .field textarea{min-height:100px;resize:vertical}
 .form-ok{display:none;text-align:center;padding:20px 0}
 
-/* demo */
-.demo-notice{padding:40px 0 72px}
-.demo-box{display:grid;grid-template-columns:.9fr 1.5fr;gap:36px;align-items:center;background:#15140f;border:1px solid rgba(255,250,235,.07);border-radius:20px;padding:38px 40px;position:relative;overflow:hidden}
-.demo-box::before{content:"";position:absolute;inset:auto -20% -70% auto;width:55%;height:170%;background:radial-gradient(ellipse at 70% 50%,rgba(227,119,73,.22),transparent 62%);pointer-events:none}
-.demo-box h3{color:#f5f1e6;font-size:clamp(26px,3.6vw,38px);line-height:.92;letter-spacing:-.03em}
-.demo-box h3 span{color:var(--accent)}
-.demo-box p{color:#a5a39d;font-size:16px;line-height:1.55;position:relative}
-.demo-box p strong{color:#f5f1e6}
-html.compare-open .demo-notice{display:none}
-@media(max-width:820px){.demo-box{grid-template-columns:1fr;gap:18px;padding:28px 24px}}
+}
 
 /* footer */
 footer{border-top:1px solid var(--border-soft);padding:44px 0 28px}
@@ -247,7 +238,7 @@ html.compare-open .compare-btn,html.compare-open .theme-toggle{opacity:0;pointer
 <section class="hero">
   <div class="container hero-top">
     <div>
-      <p class="eyebrow reveal">Михайловск · навесы с&nbsp;2013 года</p>
+      <p class="eyebrow reveal">Михайловск · навесы и сварка</p>
       <h1 class="reveal">Навесы<br>любой сложности<br><span class="accent">под&nbsp;ключ</span></h1>
       <p class="lead reveal">Односкатные, двускатные и арочные навесы из профильной трубы. Бесплатный замер, расчёт нагрузок SCAD Office, гарантия.</p>
       <div class="hero-ctas reveal">
@@ -326,7 +317,7 @@ html.compare-open .compare-btn,html.compare-open .theme-toggle{opacity:0;pointer
       <div class="reveal">
         <p class="eyebrow">О компании</p>
         <h2>Став-Сварка — навесы под&nbsp;ключ в&nbsp;Михайловске</h2>
-        <p style="color:var(--muted);margin-top:4px">Работаем с 2013 года. Собственное производство, индивидуальные проекты, гибкая ценовая политика.</p>
+        <p style="color:var(--muted);margin-top:4px">Работаем на рынке более 10 лет. Собственное производство, индивидуальные проекты, гибкая ценовая политика.</p>
         <ul class="about-list">
           <li><div class="check"><svg aria-hidden="true" ><path d="m5 13 4 4L19 7"/></svg></div><span>Бесплатный замер и выезд специалиста</span></li>
           <li><div class="check"><svg aria-hidden="true" ><path d="m5 13 4 4L19 7"/></svg></div><span>Расчёт нагрузок в SCAD Office</span></li>
@@ -362,7 +353,6 @@ html.compare-open .compare-btn,html.compare-open .theme-toggle{opacity:0;pointer
 </section>
 
 <!-- DEMO -->
-<section class="demo-notice"><div class="container"><div class="demo-box"><h3>ДАВАЙТЕ<br>СДЕЛАЕМ<br><span>ЧТО-ТО КРУТОЕ</span></h3><p><strong>Перед вами демо из 2–3 блоков — этого достаточно, чтобы оценить подачу и уровень проработки.</strong> Полный сайт соберём под вас: все разделы, каталог с фильтрами, интеграции с CRM и приёмом заявок, SEO и аналитика.</p></div></div></section>
 
 </main>
 
